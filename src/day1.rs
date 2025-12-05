@@ -1,6 +1,8 @@
-pub struct Solver {}
+use crate::solve::Solver;
 
-impl Solver {
+pub struct Day1 {}
+
+impl Day1 {
     fn parse_input(&self, input: &str) -> Vec<String> {
         let input:Vec<_> = input.split('\n').collect();
         input.iter().map(|x| x.to_string()).collect()
@@ -8,10 +10,11 @@ impl Solver {
 }
 
 
-type Part1 = i32;
+impl Solver<1> for Day1 {
+    type Part1 = i32;
+    type Part2 = i32;
 
-impl Solver {
-    pub fn solve_part_one(&self, input: &str) -> Part1 {
+    fn solve_part_one(&self, input: &str) -> Self::Part1 {
         let input = self.parse_input(input);
 
         let mut zero_num = 0;
@@ -33,16 +36,20 @@ impl Solver {
 
         zero_num
     }
+
+    fn solve_part_two(&self, _input: &str) -> Self::Part2 {
+        todo!()
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::day1::{self};
+    use crate::{day1::Day1, solve::{Solver}};
 
     #[test]
     fn day1_part1() {
-        let solver = day1::Solver {};
-        let result = solver.solve_part_one(
+        let solve = Day1 {};
+        let result = solve.solve_part_one(
 r#"L68
 L30
 R48

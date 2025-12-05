@@ -1,6 +1,8 @@
-use std::{fs, path::Path};
-
 use clap::{command, Parser};
+
+use crate::solve::Solver;
+
+mod solve;
 
 mod day1;
 
@@ -13,13 +15,8 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let file_path = Path::new("./input/day1.txt");
-    let content = fs::read_to_string(file_path).unwrap();
-
-    let result = match args.day {
-        1 => day1::Solver{}.solve_part_one(&content.trim()),
+    match args.day {
+        1 => day1::Day1{}.solve(),
         _ => panic!("solver not found")
     };
-
-    println!("Anwser: {}" , result);
 }
