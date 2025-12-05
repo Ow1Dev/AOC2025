@@ -2,6 +2,7 @@
 .cargo
 .env
 /dist
+/input
 target
 vendor
 .direnv
