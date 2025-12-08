@@ -1,4 +1,4 @@
-use std::{fmt::Debug, fs, path::Path};
+use std::{fmt::Debug, fs};
 
 pub trait Solver<const DAY: u32> {
     type Part1: Debug;
@@ -8,9 +8,11 @@ pub trait Solver<const DAY: u32> {
     fn solve_part_two(&self, input: &str) -> Self::Part2;
 
     fn solve(&self) {
-        let path = format!("./input/{}.txt", DAY);
-        let file_path = Path::new(&path);
-        let content = fs::read_to_string(file_path).unwrap();
+        let path = format!("./input/day{}.txt", DAY);
+        let content = fs::read_to_string(&path)
+            .expect("failed to read input file");
+
+        let content = content.trim();
 
         println!("part 1: {:?}", self.solve_part_one(&content));
         println!("part 2: {:?}", self.solve_part_two(&content));
