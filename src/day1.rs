@@ -48,21 +48,12 @@ impl Solver<1> for Day1 {
             let dir = l.chars().next().expect("expect a direction");
             let num: i32 = l[1..].parse().expect("expect to be a number");
 
-            for _ in 0..num  {
-                dailpos = (dailpos + delta).rem_euclid(100);
-                dailpos += match dir {
-                    'L' => -1,
-                    'R' => 1,
+            for _ in 0..num {
+                dailpos = match dir {
+                    'L' => (dailpos + 99) % 100,
+                    'R' => (dailpos + 1) % 100,
                     _ => panic!("unknown direction"),
                 };
-
-                if dailpos == 100 {
-                    dailpos = 0;
-                }
-
-                if dailpos == -1 {
-                    dailpos = 99;
-                }
 
                 if dailpos == 0 {
                     password += 1;
